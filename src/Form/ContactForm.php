@@ -53,10 +53,13 @@ class ContactForm extends Form
             ),
         ));
 
-        $captcha = new Element\Captcha('captcha');
-        $captcha->setCaptcha($this->captchaAdapter);
-        $captcha->setOptions(array('label' => 'Please verify you are human.'));
-        $this->add($captcha);
+        // optional CAPTCHA adapter
+        if ($this->captchaAdapter) {
+            $captcha = new Element\Captcha('captcha');
+            $captcha->setCaptcha($this->captchaAdapter);
+            $captcha->setOptions(array('label' => 'Please verify you are human.'));
+            $this->add($captcha);
+        }
 
         $this->add(new Element\Csrf('csrf'));
 

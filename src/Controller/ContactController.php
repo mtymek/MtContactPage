@@ -3,7 +3,7 @@
  * MtContactPage - simple contact page based on MtMail module
  *
  * @link      http://github.com/mtymek/MtContactPage
- * @copyright Copyright (c) 2013-2014 Mateusz Tymek
+ * @copyright Copyright (c) 2014 Mateusz Tymek
  * @license   BSD 2-Clause
  */
 
@@ -12,7 +12,7 @@ namespace MtContactPage\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-use Application\Form\ContactForm;
+use MtContactPage\Form\ContactForm;
 
 class ContactController extends AbstractActionController
 {
@@ -21,10 +21,25 @@ class ContactController extends AbstractActionController
      */
     protected $contactForm;
 
+    /**
+     * Class constructor
+     *
+     * @param ContactForm $contactForm
+     */
+    public function __construct(ContactForm $contactForm)
+    {
+        $this->contactForm = $contactForm;
+    }
+
+    /**
+     * Render contact form and handle submission
+     *
+     * @return ViewModel
+     */
     public function indexAction()
     {
         $request = $this->getRequest();
-        $form = $this->getContactForm();
+        $form = $this->contactForm;
 
         if ($request->isPost()) {
             $form->setData($request->getPost());
@@ -51,6 +66,11 @@ class ContactController extends AbstractActionController
         ));
     }
 
+    /**
+     * Render "Thank you" page
+     *
+     * @return array
+     */
     public function thankYouAction()
     {
         $headers = $this->request->getHeaders();
@@ -61,26 +81,5 @@ class ContactController extends AbstractActionController
         }
 
         return array();
-    }
-
-    /**
-     * @param \Application\Form\ContactForm $form
-     * @return ContactController provides fluent interface
-     */
-    public function setContactForm($form)
-    {
-        $this->contactForm = $form;
-        return $this;
-    }
-
-    /**
-     * @return \Application\Form\ContactForm
-     */
-    public function getContactForm()
-    {
-        if (null === $this->contactForm) {
-            $this->contactForm = $this->getServiceLocator()->get('MtContactPage\Form\ContactForm');
-        }
-        return $this->contactForm;
     }
 }

@@ -1,4 +1,11 @@
 <?php
+/**
+ * MtContactPage - simple contact page based on MtMail module
+ *
+ * @link      http://github.com/mtymek/MtContactPage
+ * @copyright Copyright (c) 2014 Mateusz Tymek
+ * @license   BSD 2-Clause
+ */
 
 return array(
     'router' => array(
@@ -28,9 +35,14 @@ return array(
             ),
         ),
     ),
-    'controllers' => array(
+    'service_manager' => array(
         'invokables' => array(
-            'MtContactPage\Controller\Contact' => 'MtContactPage\Controller\ContactController'
+            'MtContactPage\Form\ContactForm' => 'MtContactPage\Form\ContactForm',
+        ),
+    ),
+    'controllers' => array(
+        'factories' => array(
+            'MtContactPage\Controller\Contact' => 'MtContactPage\Factory\ContactControllerFactory'
         ),
     ),
     'view_manager' => array(
