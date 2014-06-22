@@ -1,0 +1,44 @@
+`<?php $this->headTitle()->prepend('Contact'); ?>
+<section class="contact">
+<h2>Contact Me</h2>
+
+<p>
+    If you want to contact me, please use the form below.
+</p>
+
+<?php if ($this->error): ?>
+<p class="error">
+    There were one or more isues with your submission. Please correct them as
+    indicated below.
+</p>
+<?php endif ?>
+
+<?php
+$form = $this->form;
+$form->prepare();
+$form->setAttribute('action', $this->url('contact'));
+$form->get('send')->setAttribute('class', 'btn btn-warning');
+$form->get('body')->setAttribute('class', 'span6')->setAttribute('rows', 5);
+$formRenderer = $this->formRenderer($form, 'renderer.bootstrap', 'horizontal');
+echo $formRenderer->openTag();
+?>
+<fieldset>
+
+    <?php echo $formRenderer->formRow($form->get('from')) ?>
+    <?php echo $formRenderer->formRow($form->get('subject')) ?>
+    <?php echo $formRenderer->formRow($form->get('body')) ?>
+    <?php if ($form->has('captcha')) : ?>
+    <div class="control-group">
+        <label class="control-label"></label>
+        <div class="controls">
+            <?php echo $this->formCaptcha($form->get('captcha')) ?>
+            <?php echo $this->formElementErrors($form->get('captcha')) ?>
+        </div>
+    </div>
+    <?php endif ?>
+    <?php echo $formRenderer->formHidden($form->get('csrf')) ?>
+    <?php echo $formRenderer->formRow($form->get('send')) ?>
+
+</fieldset>
+<?php echo $formRenderer->closeTag() ?>
+</section>
