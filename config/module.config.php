@@ -8,6 +8,9 @@
  */
 
 return array(
+    'mt_contact_page' => array(
+        'send_to' => ''
+    ),
     'router' => array(
         'routes' => array(
             'contact' => array(

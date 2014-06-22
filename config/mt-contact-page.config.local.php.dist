@@ -1,0 +1,11 @@
+<?php
+/**
+ * Copy this file to you main config/autoload directory, rename
+ * it to mt-contact-page.local.php, then update variables below
+ * accordingly to your needs
+ */
+return array(
+    'mt_contact_page' => array(
+        'send_to' => 'YOUR_EMAIL_ADDRESS'
+    ),
+);

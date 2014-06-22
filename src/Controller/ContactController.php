@@ -22,13 +22,19 @@ class ContactController extends AbstractActionController
     protected $contactForm;
 
     /**
+     * @var string
+     */
+    protected $sendTo;
+
+    /**
      * Class constructor
      *
      * @param ContactForm $contactForm
      */
-    public function __construct(ContactForm $contactForm)
+    public function __construct(ContactForm $contactForm, $sendTo)
     {
         $this->contactForm = $contactForm;
+        $this->sendTo = $sendTo;
     }
 
     /**
@@ -49,7 +55,7 @@ class ContactController extends AbstractActionController
                 $message = $mailService->compose(array(
                         'subject' => $form->get('subject')->getValue(),
                         'reply-to' => $form->get('from')->getValue(),
-                        'to' => 'mtymek@gmail.com'
+                        'to' => $this->sendTo,
                     ),
                     'application/mail/contact.phtml',
                     $form->getData()

@@ -25,8 +25,10 @@ class ContactControllerFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $appSm = $serviceLocator->getServiceLocator();
+        $config = $appSm->get('Configuration');
         return new ContactController(
-            $appSm->get('MtContactPage\Form\ContactForm')
+            $appSm->get('MtContactPage\Form\ContactForm'),
+            $config['mt_contact_page']['send_to']
         );
     }
 }
