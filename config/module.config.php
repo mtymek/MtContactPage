@@ -9,7 +9,8 @@
 
 return array(
     'mt_contact_page' => array(
-        'send_to' => ''
+        'send_to' => '',
+        'captcha_adapter' => null,
     ),
     'router' => array(
         'routes' => array(
@@ -39,8 +40,8 @@ return array(
         ),
     ),
     'service_manager' => array(
-        'invokables' => array(
-            'MtContactPage\Form\ContactForm' => 'MtContactPage\Form\ContactForm',
+        'factories' => array(
+            'MtContactPage\Form\ContactForm' => 'MtContactPage\Factory\ContactFormFactory',
         ),
     ),
     'controllers' => array(

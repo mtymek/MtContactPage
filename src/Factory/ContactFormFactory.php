@@ -24,7 +24,12 @@ class ContactFormFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $captcha = null;
+        $config = $serviceLocator->get('Configuration');
+        if ($config['mt_contact_page']['captcha_adapter']) {
+            $captcha = $serviceLocator->get($config['mt_contact_page']['captcha_adapter']);
+        } else {
+            $captcha = null;
+        }
         $form = new ContactForm('contact', $captcha);
         $form->setInputFilter(new ContactFilter());
         return $form;
