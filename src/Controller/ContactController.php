@@ -57,7 +57,7 @@ class ContactController extends AbstractActionController
                         'reply-to' => $form->get('from')->getValue(),
                         'to' => $this->sendTo,
                     ),
-                    'application/mail/contact.phtml',
+                    'mt-contact-page/mail/contact.phtml',
                     $form->getData()
                 );
 
